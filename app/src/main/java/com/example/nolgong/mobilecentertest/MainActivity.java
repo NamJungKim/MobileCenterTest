@@ -8,6 +8,9 @@ import android.widget.Button;
 import com.microsoft.azure.mobile.MobileCenter;
 import com.microsoft.azure.mobile.analytics.Analytics;
 import com.microsoft.azure.mobile.crashes.Crashes;
+import com.microsoft.azure.mobile.MobileCenter;
+import com.microsoft.azure.mobile.push.Push;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
         MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7",
                 Analytics.class, Crashes.class);
+        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7", Push.class);
+
 
         first = (Button)findViewById(R.id.first);
         second = (Button)findViewById(R.id.second);
