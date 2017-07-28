@@ -68,11 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274", Analytics.class, Crashes.class);
+        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274", Analytics.class, Crashes.class,Push.class);
 
         Log.d("push isEnable2",""+Push.isEnabled());
         //Push.enableFirebaseAnalytics(getApplication());
-        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274", Push.class);
 
         Log.d("token : ", FirebaseInstanceId.getInstance().getToken());
         FirebaseMessaging.getInstance().subscribeToTopic("notice");
