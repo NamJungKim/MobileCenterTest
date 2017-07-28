@@ -31,11 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7",
-                Analytics.class, Crashes.class);
 
-        Push.enableFirebaseAnalytics(getApplication());
-        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7", Push.class);
+
         Push.setListener(new PushListener() {
             @Override
             public void onPushNotificationReceived(Activity activity, PushNotification pushNotification) {
@@ -69,11 +66,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7",
+                Analytics.class, Crashes.class);
+
+        Push.enableFirebaseAnalytics(getApplication());
+        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7", Push.class);
 
         Log.d("token : ", FirebaseInstanceId.getInstance().getToken());
         FirebaseMessaging.getInstance().subscribeToTopic("notice");
 
-        MobileCenter.start();
 
         first = (Button)findViewById(R.id.first);
         second = (Button)findViewById(R.id.second);
