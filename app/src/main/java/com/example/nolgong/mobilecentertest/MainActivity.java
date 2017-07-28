@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-        Push.setListener(new PushListener() {
+        Push push = Push.getInstance();
+        push.setListener(new PushListener() {
             @Override
             public void onPushNotificationReceived(Activity activity, PushNotification pushNotification) {
                 Log.d("MobileCenter Push ","pushNotification.getMessage()");
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 Analytics.class, Crashes.class);
 
         //Push.enableFirebaseAnalytics(getApplication());
-        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7", Push.class);
+        MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7", push.getClass());
 
         Log.d("token : ", FirebaseInstanceId.getInstance().getToken());
         FirebaseMessaging.getInstance().subscribeToTopic("notice");
