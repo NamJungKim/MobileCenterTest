@@ -31,7 +31,9 @@
         </activity>
         <activity android:name=".FirstActivity" />
         <activity android:name=".SecondActivity" />
-        <activity android:name=".ThirdActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ec98c9a5e5d5ef444e0b72f3038e080bb94a7b67" />
     </application>
 
 </manifest>

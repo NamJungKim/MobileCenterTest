@@ -15,7 +15,7 @@ public class SecondActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
+        setContentView(R.layout.activity_second);
 
         btn = (Button)findViewById(R.id.back);
 

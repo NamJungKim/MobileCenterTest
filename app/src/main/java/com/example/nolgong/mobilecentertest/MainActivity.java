@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.microsoft.azure.mobile.MobileCenter;
@@ -19,6 +21,7 @@ import com.microsoft.azure.mobile.push.Push;
 import com.microsoft.azure.mobile.push.PushListener;
 import com.microsoft.azure.mobile.push.PushNotification;
 
+import io.fabric.sdk.android.Fabric;
 import java.util.Map;
 
 
@@ -29,48 +32,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Push.enableFirebaseAnalytics(getApplication());
+        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274",
+                Analytics.class, Crashes.class,Push.class);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         first = (Button)findViewById(R.id.first);
         second = (Button)findViewById(R.id.second);
         third = (Button)findViewById(R.id.third);
 
-        Push.setListener(new PushListener() {
-            @Override
-            public void onPushNotificationReceived(Activity activity, PushNotification pushNotification) {
-                Log.d("MobileCenter Push ",pushNotification.getMessage());
-                /* The following notification properties are available. */
-                String title = pushNotification.getTitle();
-                String message = pushNotification.getMessage();
-                Map<String, String> customData = pushNotification.getCustomData();
-                first.setText(pushNotification.getMessage());
-        /*
-         * Message and title cannot be read from a background notification object.
-         * Message being a mandatory field, you can use that to check foreground vs background.
-         */
-                if (message != null) {
-
-                    first.setText(pushNotification.getMessage());
-            /* Display an alert for foreground push. */
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-                    if (title != null) {
-                        dialog.setTitle(title);
-                    }
-                    dialog.setMessage(message);
-                    if (!customData.isEmpty()) {
-                        dialog.setMessage(message + "\n" + customData);
-                    }
-                    dialog.setPositiveButton(android.R.string.ok, null);
-                    dialog.show();
-                } else {
-
-            /* Display a toast when a background push is clicked. */
-                    Toast.makeText(activity, String.format(activity.getString(R.string.push_toast), customData), Toast.LENGTH_LONG).show(); // For example R.string.push_toast would be "Push clicked with data=%1s"
-                }
-            }
-        });
-        Push.enableFirebaseAnalytics(getApplication());
-        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274",
-                Analytics.class, Crashes.class,Push.class);
 
         Log.d("push isEnable2",""+Push.isEnabled());
 
