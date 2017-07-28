@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7",
                 Analytics.class, Crashes.class);
 
-        Push.enableFirebaseAnalytics(getApplication());
+        //Push.enableFirebaseAnalytics(getApplication());
         MobileCenter.start(getApplication(), "c72d1e69-28d9-4e98-ac29-b2c4fbbdcfe7", Push.class);
 
         Log.d("token : ", FirebaseInstanceId.getInstance().getToken());
