@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
         second = (Button)findViewById(R.id.second);
         third = (Button)findViewById(R.id.third);
 
-        Push push = Push.getInstance();
-        push.setListener(new PushListener() {
+        Push.setListener(new PushListener() {
             @Override
             public void onPushNotificationReceived(Activity activity, PushNotification pushNotification) {
                 Log.d("MobileCenter Push ","pushNotification.getMessage()");
@@ -71,10 +70,9 @@ public class MainActivity extends AppCompatActivity {
         });
         MobileCenter.start(getApplication(), "279ab3ae-20ad-4f75-a5a0-227b975308d2", Analytics.class, Crashes.class);
 
-        Log.d("push isEnable",""+push.isInstanceEnabled());
         Log.d("push isEnable2",""+Push.isEnabled());
         //Push.enableFirebaseAnalytics(getApplication());
-        MobileCenter.start(getApplication(), "279ab3ae-20ad-4f75-a5a0-227b975308d2", push.getClass());
+        MobileCenter.start(getApplication(), "279ab3ae-20ad-4f75-a5a0-227b975308d2", Push.class);
 
         Log.d("token : ", FirebaseInstanceId.getInstance().getToken());
         FirebaseMessaging.getInstance().subscribeToTopic("notice");
