@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        first = (Button)findViewById(R.id.first);
+        second = (Button)findViewById(R.id.second);
+        third = (Button)findViewById(R.id.third);
 
         Push push = Push.getInstance();
         push.setListener(new PushListener() {
@@ -40,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 String title = pushNotification.getTitle();
                 String message = pushNotification.getMessage();
                 Map<String, String> customData = pushNotification.getCustomData();
-
+                first.setText(pushNotification.getMessage());
         /*
          * Message and title cannot be read from a background notification object.
          * Message being a mandatory field, you can use that to check foreground vs background.
          */
                 if (message != null) {
 
+                    first.setText(pushNotification.getMessage());
             /* Display an alert for foreground push. */
                     AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
                     if (title != null) {
@@ -75,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseMessaging.getInstance().subscribeToTopic("notice");
 
 
-        first = (Button)findViewById(R.id.first);
-        second = (Button)findViewById(R.id.second);
-        third = (Button)findViewById(R.id.third);
+
 
         first.setOnClickListener(new View.OnClickListener() {
             @Override
