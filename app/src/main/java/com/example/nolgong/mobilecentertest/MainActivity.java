@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Push.setListener(new PushListener() {
             @Override
             public void onPushNotificationReceived(Activity activity, PushNotification pushNotification) {
-                Log.d("MobileCenter Push ","pushNotification.getMessage()");
+                Log.d("MobileCenter Push ",pushNotification.getMessage());
                 /* The following notification properties are available. */
                 String title = pushNotification.getTitle();
                 String message = pushNotification.getMessage();
@@ -68,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274", Analytics.class, Crashes.class,Push.class);
+        Push.enableFirebaseAnalytics(getApplication());
+        MobileCenter.start(getApplication(), "cf91b008-c603-43d8-9571-f39ed32cb274",
+                Analytics.class, Crashes.class,Push.class);
 
         Log.d("push isEnable2",""+Push.isEnabled());
-        //Push.enableFirebaseAnalytics(getApplication());
+
 
         Log.d("token : ", FirebaseInstanceId.getInstance().getToken());
         FirebaseMessaging.getInstance().subscribeToTopic("notice");
